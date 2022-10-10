@@ -4,9 +4,9 @@ import { Constants } from "./constants";
 export class ErrorUtils {
 
     static throwError(
-        message: string = Constants.GENERIC_ERROR
+        error: Error
     ): Error {
-        throw new Error(message);
+        throw error;
     }
 
     static throwHttpError(
