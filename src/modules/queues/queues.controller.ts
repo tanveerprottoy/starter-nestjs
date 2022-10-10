@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { Constants } from "../../../utils/constants";
 import { QueuesService } from './queues.service';
 
@@ -11,10 +11,8 @@ export class QueuesController {
     constructor(private readonly queuesService: QueuesService) { }
 
     @Post()
-    async createJob(@Body() dto: any) {
-        this.queuesService.addJob(dto);
-        return {
-            message: "Job added to queue"
-        };
+    @HttpCode(HttpStatus.OK)
+    async addJob(@Body() dto: any) {
+        return await this.queuesService.addJob(dto);
     }
 }

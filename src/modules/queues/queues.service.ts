@@ -2,6 +2,7 @@ import { InjectQueue } from "@nestjs/bull";
 import { Injectable } from '@nestjs/common';
 import { Queue } from "bull";
 import { QueueConstants } from "../../../utils/constants";
+import { ErrorUtils } from "../../../utils/error.utils";
 import { ConfigClientInstance } from "../../libs/clients/config.client";
 
 @Injectable()
@@ -16,9 +17,13 @@ export class QueuesService {
             await this.queue.add(
                 payload
             );
+            return {
+                message: "Job added to queue"
+            };
         }
         catch(e) {
             console.error(e);
+            ErrorUtils.throwHttpError();
         }
     }
 
@@ -28,9 +33,13 @@ export class QueuesService {
                 QueueConstants.PROCESS_EVENT,
                 payload
             );
+            return {
+                message: "Job added to queue"
+            };
         }
         catch(e) {
             console.error(e);
+            ErrorUtils.throwHttpError();
         }
     }
 }
