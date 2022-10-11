@@ -30,7 +30,7 @@ export class QueuesService {
     async addNamedJob(payload: any) {
         try {
             await this.queue.add(
-                QueueConstants.PROCESS_EVENT,
+                QueueConstants.PROCESS_JOB,
                 payload
             );
             return {

@@ -11,5 +11,5 @@ export const Configs = {
 } as const;
 
 export const QueueConstants = {
-    PROCESS_EVENT: "process",
+    PROCESS_JOB: "process",
 } as const;
