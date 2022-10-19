@@ -1,4 +1,5 @@
 import { BulkWriteOptions, DeleteOptions, DeleteResult, Document, Filter, FindCursor, FindOptions, InsertManyResult, InsertOneOptions, InsertOneResult, OptionalUnlessRequiredId, UpdateFilter, UpdateOptions, UpdateResult, WithId } from "mongodb";
+import { ErrorUtils } from "../../../utils/error.utils";
 import { DbClientInstance } from "./db.client";
 
 class DbDataOps {
@@ -7,7 +8,9 @@ class DbDataOps {
     private constructor() {
         console.log("DbDataOps init");
         if(DbDataOps.instance) {
-            throw new Error("Error - already initialized");
+            ErrorUtils.throwError(
+                new Error("Error - already initialized")
+            );
         }
     }
 
@@ -36,8 +39,7 @@ class DbDataOps {
             }
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -66,8 +68,7 @@ class DbDataOps {
             }
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -81,12 +82,11 @@ class DbDataOps {
             const cursor = DbClientInstance.db.collection<T>(
                 name
             ).find();
-            // console.log(cursor);
+            console.log(cursor);
             return cursor;
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -107,142 +107,7 @@ class DbDataOps {
             );
         }
         catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findYearAndBoard<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        subject?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).distinct("boardId", filter);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findSubjectFromClass<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        subject?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).distinct("subjectId", filter);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-
-    findYearSubject<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).find(
-                filter,
-                options
-            );
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findAvailableYear<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        distinctItems?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).distinct(distinctItems, filter);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findAvailableSubjectFromClass<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        distinctItems?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).distinct(distinctItems, filter);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findQuestionSingle<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        distinctItems?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).find(filter);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findAvailableClass<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        distinctItems?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).distinct(distinctItems);
-        }
-        catch(e) {
-            console.error(e);
-            return e;
-        }
-    }
-    findAvailableSubjectOfYear<T>(
-        name: string,
-        filter?: Filter<T>,
-        options?: FindOptions,
-        distinctItems?: string
-    ): any {
-        try {
-            return DbClientInstance.db.collection<T>(
-                name
-            ).find(
-                filter,
-                options
-            );
-        }
-        catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -263,8 +128,7 @@ class DbDataOps {
             );
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -296,8 +160,7 @@ class DbDataOps {
             }
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -329,11 +192,9 @@ class DbDataOps {
             }
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
-    
 
     /**
      * @param name - the collection name.
@@ -352,8 +213,7 @@ class DbDataOps {
             );
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
@@ -374,8 +234,7 @@ class DbDataOps {
             );
         }
         catch(e) {
-            console.error(e);
-            return e;
+            ErrorUtils.throwError(e);
         }
     }
 
