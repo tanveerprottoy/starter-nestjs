@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { QueuesService } from './queues.service';
-import { QueuesController } from './queues.controller';
+import { JobsService } from './jobs.service';
+import { JobsController } from './jobs.controller';
 import { BullModule } from "@nestjs/bull";
 import { ConfigClientInstance } from "../../libs/clients/config.client";
-import { QueuesConsumer } from "./queues.consumer";
+import { JobsConsumer } from "./jobs.consumer";
 
 @Module({
     imports: [
@@ -11,10 +11,10 @@ import { QueuesConsumer } from "./queues.consumer";
             name: ConfigClientInstance.getValue("redisQueueName"),
         }),
     ],
-    controllers: [QueuesController],
+    controllers: [JobsController],
     providers: [
-        QueuesService,
-        QueuesConsumer,
+        JobsService,
+        JobsConsumer,
     ]
 })
 export class QueuesModule { }

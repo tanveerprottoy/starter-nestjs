@@ -5,7 +5,7 @@ import { QueueConstants } from "../../../utils/constants";
 import { ConfigClientInstance } from "../../libs/clients/config.client";
 
 @Injectable()
-export class QueuesService {
+export class JobsService {
 
     constructor(
         @InjectQueue(ConfigClientInstance.getValue("redisQueueName")) private queue: Queue,

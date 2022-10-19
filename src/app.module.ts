@@ -5,7 +5,7 @@ import * as winston from 'winston';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigClientInstance } from "./libs/clients/config.client";
-import { QueuesModule } from './modules/queues/queues.module';
+import { QueuesModule } from './modules/jobs/jobs.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({

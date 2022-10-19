@@ -6,7 +6,7 @@ import { ConfigClientInstance } from "../../libs/clients/config.client";
 
 @Injectable()
 @Processor(ConfigClientInstance.getValue("redisQueueName"))
-export class QueuesConsumer {
+export class JobsConsumer {
 
     @OnQueueActive()
     onActive(job: Job) {

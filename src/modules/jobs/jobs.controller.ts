@@ -1,14 +1,14 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { Constants } from "../../../utils/constants";
-import { QueuesService } from './queues.service';
+import { JobsService } from './jobs.service';
 
 @Controller({
-    path: "queues",
+    path: "jobs",
     version: Constants.API_VERSION_1
 })
-export class QueuesController {
+export class JobsController {
 
-    constructor(private readonly queuesService: QueuesService) { }
+    constructor(private readonly queuesService: JobsService) { }
 
     @Post()
     async createJob(@Body() dto: any) {
