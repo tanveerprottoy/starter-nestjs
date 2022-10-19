@@ -5,7 +5,7 @@ import * as winston from 'winston';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigClientInstance } from "./libs/clients/config.client";
-import { QueuesModule } from './modules/jobs/jobs.module';
+import { JobsModule } from './modules/jobs/jobs.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
@@ -35,7 +35,7 @@ import { UsersModule } from './modules/users/users.module';
                 winston.format.printf(info => `${[info.timestamp]}|[${info.level.toUpperCase()}]|${info.message}|${info.level.toUpperCase()} STACK:\n${info.stack}`),
             ),
         }),
-        QueuesModule,
+        JobsModule,
         UsersModule,
     ],
     controllers: [AppController],

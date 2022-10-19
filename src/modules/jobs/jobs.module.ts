@@ -17,4 +17,4 @@ import { JobsConsumer } from "./jobs.consumer";
         JobsConsumer,
     ]
 })
-export class QueuesModule { }
+export class JobsModule { }
