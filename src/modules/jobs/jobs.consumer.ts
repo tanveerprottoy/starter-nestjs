@@ -23,7 +23,7 @@ export class JobsConsumer {
 
     @Process(QueueConstants.PROCESS_JOB)
     async handleNamedJob(job: Job<any>) {
-        // console.log(job);
+        console.log(job);
         // await this.repository.create(job);
         return {};
     }
