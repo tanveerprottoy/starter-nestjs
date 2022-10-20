@@ -11,6 +11,7 @@ import { UsersModule } from './modules/users/users.module';
 @Module({
     imports: [
         BullModule.forRoot({
+            // url: "redis://localhost:6379"
             redis: {
                 host: ConfigClientInstance.getValue("redisHost"),
                 port: ConfigClientInstance.getValue("redisPort"),
