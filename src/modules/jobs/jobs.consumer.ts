@@ -17,13 +17,13 @@ export class JobsConsumer {
 
     @Process()
     async handleJob(job: Job<any>) {
-        console.log(job);
+        console.log(job.data);
         return {};
     }
 
     @Process(QueueConstants.PROCESS_JOB)
     async handleNamedJob(job: Job<any>) {
-        console.log(job);
+        // console.log(job);
         // await this.repository.create(job);
         return {};
     }

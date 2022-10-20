@@ -15,7 +15,11 @@ export class JobsService {
     async addJob(payload: any) {
         try {
             await this.queue.add(
-                payload
+                payload,
+                {
+                    delay: 5000,
+                    removeOnComplete: true,
+                },
             );
             return {
                 message: "Job added to queue"
