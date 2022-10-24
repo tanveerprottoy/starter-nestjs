@@ -7,7 +7,7 @@ export default class CryptoUtils {
         return await bcrypt.genSalt(rounds)
     }
 
-    static async encrypt(data: string): Promise<string> {
+    static async hash(data: string): Promise<string> {
         // generate salt to hash password
         const salt = await this.generateSalt(Configs.SALT_ROUNDS)
         return await bcrypt.hash(data, salt)
