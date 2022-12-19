@@ -10,13 +10,31 @@ import { UsersModule } from './modules/users/users.module';
 
 @Module({
     imports: [
+        BullModule.forRootAsync({
+            useFactory: async () => ({
+                redis: {
+                    host: ConfigClientInstance.getValue("redisHost"),
+                    port: ConfigClientInstance.getValue("redisPort")
+                },
+            }),
+        }),
+        /* BullModule.forRootAsync({
+            imports: [ConfigModule],
+            useFactory: async (configService: ConfigService) => ({
+                redis: {
+                    host: BuildUtils.getRedisHost(configService),
+                    port: BuildUtils.getRedisPort(configService)
+                },
+            }),
+            inject: [ConfigService],
+        }),
         BullModule.forRoot({
             // url: "redis://localhost:6379"
             redis: {
                 host: ConfigClientInstance.getValue("redisHost"),
                 port: ConfigClientInstance.getValue("redisPort"),
             },
-        }),
+        }), */
         WinstonModule.forRoot({
             transports: [
                 new winston.transports.File({
