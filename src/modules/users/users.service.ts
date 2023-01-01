@@ -1,26 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable } from "@nestjs/common";
+import DbUtils from "../../libs/mongodb/db.utils";
+import { UsersRepository } from "./users.repository";
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
 
-  findAll() {
-    return `This action returns all users`;
-  }
+    constructor(private readonly repository: UsersRepository) { }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+    create = async (
+        data: any
+    ): Promise<any> => {
+        return await this.repository.create(data);
+    };
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+    findAll = async (
+        limit: number,
+        page: number
+    ): Promise<any> => {
+        const cursor = this.repository.readMany(limit, page);
+        const docs = await DbUtils.streamCursorData(cursor);
+        return docs;
+    };
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+    findOne = async (
+        id: string
+    ): Promise<any> => {
+        return await this.repository.readOne(id);
+    };
+
+    update = async (
+        id: string,
+        data: any
+    ): Promise<any> => {
+        return await this.repository.update(id, data);
+    };
+
+    remove = async (
+        id: string
+    ): Promise<any> => {
+        return await this.repository.delete(id);
+    };
 }

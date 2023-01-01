@@ -14,17 +14,14 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async insertOne<T>(
-        name: string,
+    async insertOne<T extends Document>(
+        collectionName: string,
         doc: OptionalUnlessRequiredId<T>,
         options?: InsertOneOptions
-    ): Promise<InsertOneResult<T> | Error> {
+    ): Promise<InsertOneResult<T>> {
         try {
             const collection = DbClientInstance.db.collection<T>(
-                name
+                collectionName
             );
             if(!options) {
                 return collection.insertOne(
@@ -43,17 +40,14 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async insertMany<T>(
-        name: string,
+    async insertMany<T extends Document>(
+        collectionName: string,
         docs: OptionalUnlessRequiredId<T>[],
         options?: BulkWriteOptions
-    ): Promise<InsertManyResult<T> | Error> {
+    ): Promise<InsertManyResult<T>> {
         try {
             const collection = DbClientInstance.db.collection<T>(
-                name
+                collectionName
             );
             if(!options) {
                 return collection.insertMany(
@@ -72,35 +66,27 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    findAll<T>(
-        name: string
-    ): FindCursor<WithId<T>> | Error {
+    findAll<T extends Document>(
+        collectionName: string
+    ): FindCursor<WithId<T>> {
         try {
-            const cursor = DbClientInstance.db.collection<T>(
-                name
+            return DbClientInstance.db.collection<T>(
+                collectionName
             ).find();
-            console.log(cursor);
-            return cursor;
         }
         catch(e) {
             ErrorUtils.throwError(e);
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    find<T>(
-        name: string,
-        filter?: Filter<T>,
+    find<T extends Document>(
+        collectionName: string,
+        filter: Filter<T>,
         options?: FindOptions
-    ): FindCursor<WithId<T>> | Error {
+    ): FindCursor<WithId<T>> {
         try {
             return DbClientInstance.db.collection<T>(
-                name
+                collectionName
             ).find(
                 filter,
                 options
@@ -111,17 +97,14 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async findOne<T>(
-        name: string,
-        filter?: Filter<T>,
+    async findOne<T extends Document>(
+        collectionName: string,
+        filter: Filter<T>,
         options?: FindOptions
-    ): Promise<WithId<T> | null | Error> {
+    ): Promise<WithId<T>> {
         try {
             return await DbClientInstance.db.collection<T>(
-                name
+                collectionName
             ).findOne(
                 filter,
                 options
@@ -132,18 +115,15 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async updateOne<T>(
-        name: string,
+    async updateOne<T extends Document>(
+        collectionName: string,
         filter: Filter<T>,
         update: UpdateFilter<T> | Partial<T>,
         options?: UpdateOptions
-    ): Promise<UpdateResult | Error> {
+    ): Promise<UpdateResult> {
         try {
             const collection = DbClientInstance.db.collection<T>(
-                name
+                collectionName
             );
             if(!options) {
                 return collection.updateOne(
@@ -164,18 +144,15 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async updateMany<T>(
-        name: string,
+    async updateMany<T extends Document>(
+        collectionName: string,
         filter: Filter<T>,
         update: UpdateFilter<T>,
         options?: UpdateOptions
-    ): Promise<UpdateResult | Document | Error> {
+    ): Promise<UpdateResult | Document> {
         try {
             const collection = DbClientInstance.db.collection<T>(
-                name
+                collectionName
             );
             if(!options) {
                 return collection.updateMany(
@@ -196,17 +173,14 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async deleteOne<T>(
-        name: string,
+    async deleteOne<T extends Document>(
+        collectionName: string,
         filter: Filter<T>,
-        options?: DeleteOptions
-    ): Promise<Promise<DeleteResult> | Error> {
+        options: DeleteOptions
+    ): Promise<DeleteResult> {
         try {
-            return await DbClientInstance.db.collection<T>(
-                name
+            return DbClientInstance.db.collection<T>(
+                collectionName
             ).deleteOne(
                 filter,
                 options
@@ -217,17 +191,14 @@ class DbDataOps {
         }
     }
 
-    /**
-     * @param name - the collection name.
-     */
-    async deleteMany<T>(
-        name: string,
+    async deleteMany<T extends Document>(
+        collectionName: string,
         filter: Filter<T>,
-        options?: DeleteOptions
-    ): Promise<Promise<DeleteResult> | Error> {
+        options: DeleteOptions
+    ): Promise<DeleteResult> {
         try {
             return await DbClientInstance.db.collection<T>(
-                name
+                collectionName
             ).deleteMany(
                 filter,
                 options

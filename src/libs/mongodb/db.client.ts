@@ -1,5 +1,5 @@
 import { Db, MongoClient } from "mongodb";
-import { ErrorUtils } from "../../../utils/error.utils";
+import { ErrorUtils } from "../../utils/error.utils";
 
 class DbClient {
     private static instance: DbClient;
