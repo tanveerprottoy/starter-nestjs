@@ -1,7 +1,7 @@
 import { OnQueueActive, Process, Processor } from "@nestjs/bull";
 import { Injectable } from "@nestjs/common";
 import { Job } from "bull";
-import { QueueConstants } from "../../../utils/constants";
+import { QueueConstants } from "../../utils/constants";
 import { ConfigClientInstance } from "../../libs/clients/config.client";
 
 @Injectable()

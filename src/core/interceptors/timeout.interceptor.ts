@@ -1,6 +1,6 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler, RequestTimeoutException } from "@nestjs/common";
 import { Observable, timeout, catchError, TimeoutError, throwError } from "rxjs";
-import { Configs } from "../../../utils/constants";
+import { Configs } from "../../utils/constants";
 
 @Injectable()
 export class TimeoutInterceptor implements NestInterceptor {

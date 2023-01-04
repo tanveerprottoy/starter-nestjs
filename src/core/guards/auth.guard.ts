@@ -4,7 +4,7 @@ import { UsersService } from "../../modules/users/users.service";
 import { Reflector } from "@nestjs/core";
 import { WINSTON_MODULE_PROVIDER } from "nest-winston";
 import { Logger } from "winston";
-import HttpUtils from "../../../utils/http.utils";
+import HttpUtils from "../../utils/http.utils";
 // import * as jwt from 'jsonwebtoken';
 
 export interface AuthGuardConfig {

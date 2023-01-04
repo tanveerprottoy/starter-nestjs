@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
-import { Constants } from "../../../utils/constants";
+import { Constants } from "../../utils/constants";
 import { JobsService } from './jobs.service';
 
 @Controller({

@@ -1,8 +1,8 @@
 import { InjectQueue } from "@nestjs/bull";
 import { Injectable } from '@nestjs/common';
 import { Queue } from "bull";
-import { QueueConstants } from "../../../utils/constants";
-import { ErrorUtils } from "../../../utils/error.utils";
+import { QueueConstants } from "../../utils/constants";
+import { ErrorUtils } from "../../utils/error.utils";
 import { ConfigClientInstance } from "../../libs/clients/config.client";
 
 @Injectable()

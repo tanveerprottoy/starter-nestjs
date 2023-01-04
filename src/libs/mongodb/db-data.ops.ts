@@ -1,5 +1,5 @@
 import { BulkWriteOptions, DeleteOptions, DeleteResult, Document, Filter, FindCursor, FindOptions, InsertManyResult, InsertOneOptions, InsertOneResult, OptionalUnlessRequiredId, UpdateFilter, UpdateOptions, UpdateResult, WithId } from "mongodb";
-import { ErrorUtils } from "../../../utils/error.utils";
+import { ErrorUtils } from "../../utils/error.utils";
 import { DbClientInstance } from "./db.client";
 
 class DbDataOps {

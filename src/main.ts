@@ -1,6 +1,6 @@
 import { ValidationPipe, VersioningType } from "@nestjs/common";
 import { NestFactory } from '@nestjs/core';
-import { Constants } from "../utils/constants";
+import { Constants } from "./utils/constants";
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
 import { TimeoutInterceptor } from "./core/interceptors/timeout.interceptor";
