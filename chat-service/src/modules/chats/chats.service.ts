@@ -1,4 +1,4 @@
-import { CACHE_MANAGER, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { ChatsRepository } from "./chats.repository";
 import { WINSTON_MODULE_PROVIDER } from "nest-winston";
 import { Logger } from "winston";
@@ -9,16 +9,15 @@ import { MessageDto } from "./dto/message.dto";
 import { Cache } from 'cache-manager';
 import CoreUtils from "../../utils/core.utils";
 import { CacheHelper } from "../../components/helpers/cache.helper";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
 
 @Injectable()
 export class ChatsService {
 
     constructor(
         private readonly repository: ChatsRepository,
-        @Inject(WINSTON_MODULE_PROVIDER)
-        private readonly logger: Logger,
-        @Inject(CACHE_MANAGER)
-        private cacheManager: Cache,
+        @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
         private cacheHelper: CacheHelper,
     ) { }
 
