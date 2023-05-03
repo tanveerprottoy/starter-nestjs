@@ -1,0 +1,12 @@
+{
+    "appPort": 3000,
+    "dbUriPrefix": "mongodb://",
+    "dbUriPostfix": "localhost:27017",
+    "dbName": "starterDB",
+    "redisHost": "localhost",
+    "redisPort": 6379,
+    "redisQueueName": "starter_queue",
+    "s3AccessKeyId": "fake",
+    "s3SecretAccessKey": "fake",
+    "s3Endpoint": "http://localhost:4566"
+}

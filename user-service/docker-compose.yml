@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  starter-app-nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: starter-app-nestjs
+    container_name: starter-app-nestjs
+    env_file: .env
+    ports:
+      - 3000:3000
+    command: bash -c "npm run start:dev"
+    depends_on:
+      - mongodb
+      - redis
+  mongodb:
+    image: "mongo:latest"
+    container_name: mongo
+    volumes:
+      - starter-data:/var/lib/mongo/data
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=starterDB
+  redis:
+    image: "redis:latest"
+    container_name: redis
+    ports:
+      - 6379:6379
+volumes:
+  starter-data:
