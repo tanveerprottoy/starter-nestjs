@@ -1,4 +1,4 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { WinstonModule } from "nest-winston";
 import { format, transports } from "winston";
 import { ChatsService } from './chats.service';
@@ -7,6 +7,7 @@ import { ChatsRepository } from "./chats.repository";
 import { redisStore } from "cache-manager-redis-yet";
 import { EnvUtils } from "../../utils/env.utils";
 import { CacheHelper } from "../../components/helpers/cache.helper";
+import { CacheModule } from "@nestjs/cache-manager";
 
 @Module({
     imports: [
