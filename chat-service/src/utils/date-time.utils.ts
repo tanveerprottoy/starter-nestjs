@@ -2,8 +2,16 @@ import * as moment from "moment";
 
 export default class DateTimeUtils {
 
+    static getDate() {
+        return new Date().getTime();
+    }
+
     static getTime() {
         return new Date().getTime();
+    }
+
+    static getUTCMilliseconds() {
+        return new Date().getUTCMilliseconds();
     }
 
     static getISOString() {
@@ -16,6 +24,10 @@ export default class DateTimeUtils {
 
     static getUTCString() {
         return new Date().toUTCString();
+    }
+
+    static getTimezoneOffset() {
+        return new Date().getTimezoneOffset();
     }
 
     static isSame(
