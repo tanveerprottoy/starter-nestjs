@@ -29,3 +29,9 @@ export const AppConfigs = {
     MAX_UPLOAD_FILE_COUNT: 10,
     MAX_FILE_SIZE: 1024 * 1024 * 50
 } as const;
+
+export const RouteNames = {
+    "rbacs.POST": "rbacs.create",
+    "rbacs.GET": "rbacs.getAll",
+    "rbacs.p.GET": "rbacs.getOne",
+} as const;

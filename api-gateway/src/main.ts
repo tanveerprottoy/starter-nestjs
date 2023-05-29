@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { ConfigClientInstance } from "./libs/clients/config.client";
 import { TimeoutInterceptor } from "./components/interceptors/timeout.interceptor";
 import { ResponseInterceptor } from "./components/interceptors/response.interceptor";
+import { routeResolver } from "./components/middlewares/route-resolver-function.middleware";
 
 async function bootstrap() {
     const app = await NestFactory.create(
@@ -24,6 +25,7 @@ async function bootstrap() {
         new TimeoutInterceptor(),
         new ResponseInterceptor(),
     );
+    app.use(routeResolver);
 /*     console.log("args: ", process.argv);
     console.log("build: ", process.argv.slice(2)[0]); */
     await app.listen(

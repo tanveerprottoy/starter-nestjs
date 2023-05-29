@@ -1,5 +1,5 @@
 import { BullModule } from "@nestjs/bull";
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { WinstonModule } from "nest-winston";
 import * as winston from 'winston';
@@ -11,6 +11,11 @@ import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from "@nestjs/config";
 import { TimeoutInterceptor } from "./components/interceptors/timeout.interceptor";
 import { ResponseInterceptor } from "./components/interceptors/response.interceptor";
+import { RouteResolverMiddleware } from "./components/middlewares/route-resolver.middleware";
+import { Rbac } from "./modules/rbacs/schemas/rbac.schema";
+import { RbacsModule } from "./modules/rbacs/rbacs.module";
+import { ChatsModule } from "./modules/chats/chats.module";
+import { FileUploadsModule } from "./modules/file-uploads/file-uploads.module";
 
 @Module({
     imports: [
@@ -63,6 +68,10 @@ import { ResponseInterceptor } from "./components/interceptors/response.intercep
         }),
         JobsModule,
         UsersModule,
+        RbacsModule,
+        ChatsModule,
+        FileUploadsModule,
+        JobsModule,
     ],
     controllers: [AppController],
     providers: [
@@ -77,4 +86,11 @@ import { ResponseInterceptor } from "./components/interceptors/response.intercep
         },
     ],
 })
-export class AppModule { }
+export class AppModule {
+
+    configure(consumer: MiddlewareConsumer): void {
+        consumer.apply(RouteResolverMiddleware)
+            .exclude({ path: 'api/v1/auth', method: RequestMethod.ALL })
+            .forRoutes("/");
+    }
+}
